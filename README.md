@@ -12,6 +12,12 @@ Having the ESP8266 as the brain allows me to turn on and off both the AP and cam
 
 ![schematic](./docs/Wifi-Solar.svg)
 
+### Measuring battery voltage
+
+To measure the battery voltage (percentage), I use a voltage divider.  However the nodemcu chip already contains a voltage divider on the built in ADC (see below diagram).  So I just need an additional resistor on the input to make sure the upper limit of the batter voltage (`Vmax`) would equate to 1v max on the ESP8266 ADC.  The equation to calculate this resister comes out to `(Vmax+1)/2.2 = R / 100k`.  `Vmax` for the NiMH battery I have is ~14.6 so the resistor I chose was 800k.
+
+![nodemcu](./docs/nodemcu.png)
+
 ## PoE
 
 I used power over ethernet to power the [Unifi AC Mesh access point][unifiap].
@@ -20,7 +26,7 @@ We can see from the [AP datasheet](https://dl.ubnt.com/datasheets/unifi/UniFi_AC
 
 ![poe](./docs/ap-poe.png)
 
-According to [wikipedia](https://en.wikipedia.org/wiki/Power_over_Ethernet#Passive) and their own documentation, this means putting +24v on pins 4 and 5, and ground on 7 and 9.
+According to [wikipedia](https://en.wikipedia.org/wiki/Power_over_Ethernet#Passive) and their own documentation, this means putting +24v on pins 4 and 5, and ground on 7 and 8.
 
 We get 24v by running the battery through a voltage booster (see schematic).
 
