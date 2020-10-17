@@ -32,6 +32,8 @@ According to [wikipedia](https://en.wikipedia.org/wiki/Power_over_Ethernet#Passi
 
 We get 24v by running the battery through a voltage booster (see schematic).
 
+You can see the ADC in the below NodeMCU diagram.
+
 ## Mosfets
 
 I needed to use mosfets to programetically turn on and off the power to the access point and the camera.  This was just a design choice that I wanted to be able to control both of them to set them on schedules, and turn them off if I'm not going to use them for a bit.
