@@ -34,6 +34,12 @@ We get 24v by running the battery through a voltage booster (see schematic).
 
 You can see the ADC in the below NodeMCU diagram.
 
+## Driving the Mosftes
+
+Because we set the ESP8266 to deep sleep, this means the GPIO pins will go offline. This means we need a separate chip to hold the GPIO pin values.
+
+For this I use the [74HC4051N](https://assets.nexperia.com/documents/data-sheet/74HC_HCT4051.pdf) analog multiplex/de-multiplexer as a multiplexer (output).  I don't use the Y0 because when the ESP8266 GPIO pins go down, it will always set that to 0.  So we use Y>0 to drive the mosfets.
+
 ## Mosfets
 
 I needed to use mosfets to programetically turn on and off the power to the access point and the camera.  This was just a design choice that I wanted to be able to control both of them to set them on schedules, and turn them off if I'm not going to use them for a bit.
