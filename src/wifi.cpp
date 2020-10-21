@@ -18,7 +18,7 @@ void reconnect() {
     }
 }
 
-void ConnectToWifi() {
+void connect_to_wifi() {
     Serial.print("Now connecting to wifi from my mac: ");
     Serial.print(WiFi.macAddress());
     Serial.print("\n");
