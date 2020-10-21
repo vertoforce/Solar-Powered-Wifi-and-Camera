@@ -4,16 +4,6 @@
 
 #include "wifi_creds.h"
 
-void ConnectToWifi() {
-    Serial.print("Now connecting to wifi from my mac: ");
-    Serial.print(WiFi.macAddress());
-    Serial.print("\n");
-    wifi_promiscuous_enable(0);
-    wifi_set_opmode(STATION_MODE);
-    reconnect();
-    return;
-}
-
 void reconnect() {
     // Loop until we're reconnected
     int status = WiFi.status();
@@ -26,4 +16,14 @@ void reconnect() {
         Serial.print("Connected ");
         Serial.println(WiFi.localIP());
     }
+}
+
+void ConnectToWifi() {
+    Serial.print("Now connecting to wifi from my mac: ");
+    Serial.print(WiFi.macAddress());
+    Serial.print("\n");
+    wifi_promiscuous_enable(0);
+    wifi_set_opmode(STATION_MODE);
+    reconnect();
+    return;
 }

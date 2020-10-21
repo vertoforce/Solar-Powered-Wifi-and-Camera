@@ -4,6 +4,7 @@
 // #include "control.h"
 #include "temp.h"
 #include "wifi.h"
+#include "control.h"
 
 
 // Baud rate for debug serial
@@ -16,6 +17,7 @@ void setup() {
 
     // initialize serial for debugging
     Serial.begin(SERIAL_DEBUG_BAUD);
+    
     ConnectToWifi();
 
     dht_init();
