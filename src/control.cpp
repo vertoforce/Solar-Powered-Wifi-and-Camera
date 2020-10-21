@@ -7,7 +7,7 @@
 // Shift register
 #define  SHCP 14 // Shift register clock
 #define  STCP 12 // Register clock (latch)
-#define  DS 13   // Serial data
+#define  DS 3   // Serial data
 
 ShiftRegister74HC595<1> shiftRegister(DS, SHCP, STCP);
 
