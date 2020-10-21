@@ -11,14 +11,15 @@
 #define SERIAL_DEBUG_BAUD 115200
 
 void setup() {
-    setup_pins();
+    // Init devices
+    SetupSRPins();
+    DHTInit();
 
-    // initialize serial for debugging
+    // Init serial
     Serial.begin(SERIAL_DEBUG_BAUD);
  
-    connect_to_wifi();
-
-    dht_init();
+    // Init wifi
+    ConnectToWifi();
 }
 
 void loop() {
@@ -26,10 +27,10 @@ void loop() {
     reconnect();
 
     // Submit temp data
-    submitData();
+    SubmitTempData();
 
     // Update if anything is on or off
-    update_on_off();
+    UpdateOnOff();
 
     // Sleep
     delay(5000);

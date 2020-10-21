@@ -6,7 +6,7 @@
 
 WiFiClientSecure client;
 
-void send_attributes(char* payload) {
+void SendAttributes(char* payload) {
     HTTPClient http;
 
     // Pull attributes

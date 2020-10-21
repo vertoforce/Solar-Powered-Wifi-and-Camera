@@ -12,13 +12,13 @@ ShiftRegister74HC595<1> shiftRegister(DS, SHCP, STCP);
 #define USB2_PIN 2
 
 
-void setup_pins() {
+void SetupSRPins() {
     pinMode(SHCP, OUTPUT);
     pinMode(STCP, OUTPUT);
     pinMode(DS, OUTPUT);
 }
 
-void update_on_off() {
+void UpdateOnOff() {
     uint8_t shiftRegisterPins[] = {B00000000};
 
     // Get attributes

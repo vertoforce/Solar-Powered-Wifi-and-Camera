@@ -1,2 +1,2 @@
-void connect_to_wifi();
+void ConnectToWifi();
 void reconnect();
