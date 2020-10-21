@@ -1,14 +1,9 @@
 #include "tb.h"
 #include "Arduino.h"
 #include <ShiftRegister74HC595.h>
+#include "pins.h"
 
 // This file controls the pins to control the AP and camera
-
-// Shift register
-#define  SHCP 14 // Shift register clock
-#define  STCP 12 // Register clock (latch)
-#define  DS 3   // Serial data
-
 ShiftRegister74HC595<1> shiftRegister(DS, SHCP, STCP);
 
 // Pins on the shift register

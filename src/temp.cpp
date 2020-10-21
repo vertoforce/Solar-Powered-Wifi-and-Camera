@@ -1,8 +1,7 @@
 #include <DHT.h>
 #include "tb.h"
+#include "pins.h"
 
-// DHT
-#define DHTPIN 13
 #define DHTTYPE DHT22   
 
 // Initialize DHT sensor.
