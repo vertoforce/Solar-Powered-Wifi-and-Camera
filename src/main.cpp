@@ -10,8 +10,6 @@
 // Baud rate for debug serial
 #define SERIAL_DEBUG_BAUD 115200
 
-extern unsigned long lastSentTemp;
-
 void setup() {
     setup_pins();
 
@@ -21,8 +19,6 @@ void setup() {
     ConnectToWifi();
 
     dht_init();
-
-    lastSentTemp = 0;
 }
 
 void loop() {

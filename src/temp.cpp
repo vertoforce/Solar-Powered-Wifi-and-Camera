@@ -5,8 +5,6 @@
 #define DHTPIN 13
 #define DHTTYPE DHT22   
 
-#define SUBMIT_INTERVAL 15000
-
 // Initialize DHT sensor.
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -28,14 +26,4 @@ void submitData() {
     char payload[50];
     sprintf(payload, "{\"temperature\":%f, \"humidity\":%f}", read_temp(), read_humidity());
     send_attributes(payload);
-}
-
-unsigned long lastSentTemp;
-
-// submitInterval time
-void submitTempScheduled() {
-    if ((millis() - lastSentTemp) > SUBMIT_INTERVAL) {
-        submitData();
-        lastSentTemp = millis();
-    }
 }
