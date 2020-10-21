@@ -15,7 +15,7 @@ void setup() {
 
     // initialize serial for debugging
     Serial.begin(SERIAL_DEBUG_BAUD);
-    
+ 
     connect_to_wifi();
 
     dht_init();

@@ -12,17 +12,9 @@ void dht_init() {
     dht.begin();
 }
 
-float read_temp() {
-    return dht.readTemperature();
-}
-
-float read_humidity() {
-    return dht.readHumidity();
-}
-
 // read the temperature and submit it to thingsboard
 void submitData() {
     char payload[50];
-    sprintf(payload, "{\"temperature\":%f, \"humidity\":%f}", read_temp(), read_humidity());
+    sprintf(payload, "{\"temperature\":%f, \"humidity\":%f}", dht.readTemperature(), dht.readHumidity());
     send_attributes(payload);
 }
