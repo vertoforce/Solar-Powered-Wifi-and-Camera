@@ -1,2 +1,2 @@
-void send_attributes(String payload);
-String get_attributes();
+void send_attributes(char* payload);
+char* get_attributes();
