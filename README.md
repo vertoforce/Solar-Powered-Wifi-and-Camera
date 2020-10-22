@@ -12,6 +12,10 @@ Having the ESP8266 as the brain allows me to turn on and off both the AP and cam
 
 ![schematic](./docs/Wifi-Solar.svg)
 
+If you are ever using an esp8266 (node mcdu or otherwise), this article is super useful in determining which pins to use, which need to stay low/high at boot, etc.
+
+https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/
+
 ### Measuring battery voltage
 
 To measure the battery voltage (percentage), I use a voltage divider.  However the nodemcu chip already contains a voltage divider on the built in ADC (see below diagram).  So I just need an additional resistor on the input to make sure the upper limit of the batter voltage (`Vmax`) would equate to 1v max on the ESP8266 ADC.  The equation to calculate this resister comes out to `Vmax=R/100k + 3.2`.
