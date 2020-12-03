@@ -29,10 +29,10 @@ void loop() {
     reconnect();
 
     // Submit temp data
-    // SubmitTempData();
+    SubmitTempData();
 
     // Update if anything is on or off
-    // UpdateOnOff();
+    UpdateOnOff();
 
     Serial.print("read=");
     Serial.print(analogRead(A0));

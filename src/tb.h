@@ -1,1 +1,0 @@
-void SendAttributes(char* payload);

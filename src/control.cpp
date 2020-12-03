@@ -1,4 +1,3 @@
-#include "tb.h"
 #include "Arduino.h"
 #include <ShiftRegister74HC595.h>
 #include "pins.h"
@@ -19,6 +18,7 @@ void SetupSRPins() {
 
 void UpdateOnOff() {
     // Get attributes
+    // TODO:
 
     // Convert to binary
 
