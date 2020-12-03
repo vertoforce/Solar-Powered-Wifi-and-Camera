@@ -7,9 +7,8 @@
 ShiftRegister74HC595<1> shiftRegister(DS, SHCP, STCP);
 
 // Pins on the shift register
-#define AP_PIN 0
-#define USB_PIN 1
-#define USB2_PIN 2
+#define AP_PIN 7
+#define USB_PIN 0
 
 
 void SetupSRPins() {
@@ -19,16 +18,19 @@ void SetupSRPins() {
 }
 
 void UpdateOnOff() {
-    uint8_t shiftRegisterPins[] = {B00000000};
-
     // Get attributes
 
     // Convert to binary
 
     // Set AP pin
-    shiftRegisterPins[AP_PIN] = 0;
+    Serial.write("Setting pins high\n");
+    shiftRegister.set(AP_PIN, HIGH);
+    shiftRegister.set(USB_PIN, HIGH);
     // ...
 
-    // Set the shift register
-    shiftRegister.setAll(shiftRegisterPins);
+
+    delay(5000);
+    Serial.write("Setting pins low\n");
+    shiftRegister.set(AP_PIN, LOW);
+    shiftRegister.set(USB_PIN,LOW);
 }
