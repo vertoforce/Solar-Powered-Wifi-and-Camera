@@ -11,16 +11,9 @@
 // Baud rate for debug serial
 #define SERIAL_DEBUG_BAUD 115200
 
-// For signed binaries
-BearSSL::PublicKey signPubKey(PUBLIC_KEY);
-BearSSL::HashSHA256 hash;
-BearSSL::SigningVerifier sign(&signPubKey);
-
 CustomUpdator updator;
 
 void setup() {
-    // Set up our key for signed binaries
-    Update.installSignature(&hash, &sign);
 
     // // Init devices
     // SetupSRPins();

@@ -10,6 +10,18 @@
 
 const String version_string = __TIMESTAMP__;
 
+// For signed binaries
+BearSSL::PublicKey signPubKey(PUBLIC_KEY);
+BearSSL::HashSHA256 hash;
+BearSSL::SigningVerifier sign(&signPubKey);
+
+CustomUpdator::CustomUpdator()  {
+    lastChecked = 0;
+
+    // Set up our key for signed binaries
+    Update.installSignature(&hash, &sign);
+}
+
 void CustomUpdator::CheckForUpdate() {
     if (millis() - lastChecked > UPDATE_CHECK_INTERVAL) {
         lastChecked = millis();

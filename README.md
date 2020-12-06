@@ -70,7 +70,7 @@ openssl genrsa -out keys/private.key 2048
 openssl rsa -in keys/private.key -outform PEM -pubout -out keys/public.key
 ```
 
-Then create a file called `sign_creds.h`
+Then add this to `update_creds.h`
 
 ```cpp
 #define PUBLIC_KEY "Your public key here"

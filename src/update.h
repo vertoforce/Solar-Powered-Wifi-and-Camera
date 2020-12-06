@@ -3,6 +3,6 @@ class CustomUpdator {
     long lastChecked;
 
    public:
-    CustomUpdator() { lastChecked = 0; }
+    CustomUpdator();
     void CheckForUpdate();
 };
