@@ -1,8 +1,8 @@
 
-class CustomUpdator {
+class CustomUpdater {
     long lastChecked;
 
    public:
-    CustomUpdator();
+    CustomUpdater();
     void CheckForUpdate();
 };

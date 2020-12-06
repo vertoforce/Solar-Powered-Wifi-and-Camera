@@ -15,14 +15,14 @@ BearSSL::PublicKey signPubKey(PUBLIC_KEY);
 BearSSL::HashSHA256 hash;
 BearSSL::SigningVerifier sign(&signPubKey);
 
-CustomUpdator::CustomUpdator()  {
+CustomUpdater::CustomUpdater()  {
     lastChecked = 0;
 
     // Set up our key for signed binaries
     Update.installSignature(&hash, &sign);
 }
 
-void CustomUpdator::CheckForUpdate() {
+void CustomUpdater::CheckForUpdate() {
     if (millis() - lastChecked > UPDATE_CHECK_INTERVAL) {
         lastChecked = millis();
         t_httpUpdate_return ret = ESPhttpUpdate.update(

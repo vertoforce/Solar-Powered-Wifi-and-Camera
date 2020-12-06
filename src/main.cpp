@@ -11,7 +11,7 @@
 // Baud rate for debug serial
 #define SERIAL_DEBUG_BAUD 115200
 
-CustomUpdator updator;
+CustomUpdater updator;
 
 void setup() {
 
