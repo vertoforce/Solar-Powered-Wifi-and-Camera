@@ -1,0 +1,1 @@
+./esp8266/tools/signing.py --mode sign --privatekey keys/private.key --bin firmware.bin --out firmware.signed.bin
