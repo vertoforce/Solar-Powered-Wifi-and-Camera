@@ -2,11 +2,11 @@
 #include <ThingsBoard.h>
 
 // #include "control.h"
-#include "temp.h"
-#include "wifi.h"
 #include "control.h"
 #include "sign_creds.h"
-
+#include "temp.h"
+#include "wifi.h"
+#include "update.h"
 
 // Baud rate for debug serial
 #define SERIAL_DEBUG_BAUD 115200
@@ -14,7 +14,9 @@
 // For signed binaries
 BearSSL::PublicKey signPubKey(PUBLIC_KEY);
 BearSSL::HashSHA256 hash;
-BearSSL::SigningVerifier sign( &signPubKey );
+BearSSL::SigningVerifier sign(&signPubKey);
+
+CustomUpdator updator;
 
 void setup() {
     // Set up our key for signed binaries
@@ -28,7 +30,7 @@ void setup() {
     Serial.begin(SERIAL_DEBUG_BAUD);
 
     pinMode(A0, INPUT);
- 
+
     // Init wifi
     ConnectToWifi();
 }
@@ -46,6 +48,8 @@ void loop() {
     Serial.print("read=");
     Serial.print(analogRead(A0));
     Serial.print("\n");
+
+    updator.CheckForUpdate();
 
     // Sleep
     delay(500);
