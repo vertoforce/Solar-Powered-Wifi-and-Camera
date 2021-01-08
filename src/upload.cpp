@@ -24,12 +24,17 @@ String Post(String method, String path, String body) {
         fetch.addHeader("Content-Type", "application/json");
         fetch.POST(body);
     }
+
+    // Read body
+    String returnBody = "";
+    while (fetch.busy()) {
+        if (fetch.available()) {
+           returnBody += fetch.read();
+        }
+    }
     fetch.clean();
 
-    // TODO: Get body
-    // Get body
-    // String body = fetch.readString();
-    return "";
+    return returnBody;
 }
 
 // SendAttributes sends thingsboard attributes.
@@ -45,7 +50,8 @@ String SendTelemetry(String data) {
 }
 
 // Get Attributes returns the attributes and their values from the server
-StaticJsonDocument<400> GetAttributes(String clientKeys[], String sharedKeys[]) {
+StaticJsonDocument<400> GetAttributes(String clientKeys[],
+                                      String sharedKeys[]) {
     String clientKeysString = "";
     for (int i = 0; i < sizeof(clientKeys); i++) {
         clientKeysString += clientKeys[i];
@@ -62,8 +68,10 @@ StaticJsonDocument<400> GetAttributes(String clientKeys[], String sharedKeys[]) 
         }
     }
 
- 
-    String body = Post("GET", "/api/v1/" ACCESS_TOKEN "/attributes?clientKeys="+clientKeysString+"&sharedKeys="+sharedKeysString, "");
+    String body = Post("GET",
+                       "/api/v1/" ACCESS_TOKEN "/attributes?clientKeys=" +
+                           clientKeysString + "&sharedKeys=" + sharedKeysString,
+                       "");
 
     StaticJsonDocument<400> doc;
     deserializeJson(doc, body);
