@@ -1,46 +1,45 @@
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
-#include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
+#include <ESP8266HTTPClient.h>
+#include <ESP8266WiFi.h>
+#include <WiFiClientSecure.h>
+#include <fetch.h>
 
 #include "upload_creds.h"
 
 // Initialize the client library
 WiFiClientSecure client;
 
-// Post makes a post to thingsboard with the provided path and body.
+// Post makes a post request to the provided path with the provided body.
 String Post(String method, String path, String body) {
-    if (!client.connect(UPLOAD_TCP_SERVER, UPLOAD_TCP_PORT)) {
-        Serial.println("failed to connect");
-        return "error";
+    if (ESP.getFreeHeap() < 28000) {
+        // Do not perform anything, low memory
+        return "not enough heap";
     }
-    client.println(method+" "+path+" HTTP/1.1");
-    client.println("Connection: close");
-    client.println("User-Agent: device");
-    client.println("Content-Type: application/json");
-    client.print("Host: ");
-    client.println(UPLOAD_TCP_SERVER);
-    client.print("Content-Length: ");
-    client.print(body.length());
-    client.println();
-    client.println();
-    client.print(body.c_str());
-    client.println();
-    client.flush();
 
-    // TODO: untested, This will probably return the full body including the headers
-    String body = client.readString();
-    client.stop();
+    fetch.begin(UPLOAD_TCP_SERVER + path, true);
+    // fetch.addHeader("User-Agent", "kilnmon-device");
+    if (method == "GET") {
+        fetch.GET(path);
+    } else if (method == "POST") {
+        fetch.addHeader("Content-Type", "application/json");
+        fetch.POST(body);
+    }
+    fetch.clean();
 
-    return body;
+    // TODO: Get body
+    // Get body
+    // String body = fetch.readString();
+    return "";
 }
 
-// SendAttributes sends thingsboard attributes
+// SendAttributes sends thingsboard attributes.
+// Attributes is the JSON passed to thingsboard to set attributes.
 String SendAttributes(String attributes) {
     return Post("POST", "/api/v1/" ACCESS_TOKEN "/attributes", attributes);
 }
 
-// SendTelemetry Sends thingsboard telemetry data
+// SendTelemetry Sends thingsboard telemetry data.
+// data is the JSON containing the telementry data.
 String SendTelemetry(String data) {
     return Post("POST", "/api/v1/" ACCESS_TOKEN "/telemetry", data);
 }
@@ -48,7 +47,7 @@ String SendTelemetry(String data) {
 // Get Attributes returns the attributes and their values from the server
 StaticJsonDocument<400> GetAttributes(String clientKeys[], String sharedKeys[]) {
     String clientKeysString = "";
-    for (int i=0;i<sizeof(clientKeys);i++) {
+    for (int i = 0; i < sizeof(clientKeys); i++) {
         clientKeysString += clientKeys[i];
         if (i != sizeof(clientKeys)) {
             clientKeysString += ",";
@@ -56,7 +55,7 @@ StaticJsonDocument<400> GetAttributes(String clientKeys[], String sharedKeys[]) 
     }
 
     String sharedKeysString = "";
-    for (int i=0;i<sizeof(clientKeys);i++) {
+    for (int i = 0; i < sizeof(clientKeys); i++) {
         clientKeysString += clientKeys[i];
         if (i != sizeof(clientKeys)) {
             clientKeysString += ",";
