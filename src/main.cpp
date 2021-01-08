@@ -15,14 +15,13 @@ CustomUpdater updator;
 
 void setup() {
 
-    // // Init devices
-    // SetupSRPins();
-    // DHTInit();
+    // Init devices
+    SetupSRPins();
+    DHTInit();
+    pinMode(A0, INPUT);
 
     // Init serial
     Serial.begin(SERIAL_DEBUG_BAUD);
-
-    pinMode(A0, INPUT);
 
     // Init wifi
     ConnectToWifi();
