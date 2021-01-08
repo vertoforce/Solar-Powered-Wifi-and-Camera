@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include <ShiftRegister74HC595.h>
 #include "pins.h"
+#include "upload.h"
 
 // This file controls the pins to control the AP and camera
 ShiftRegister74HC595<1> shiftRegister(DS, SHCP, STCP);
@@ -19,18 +20,22 @@ void SetupSRPins() {
 void UpdateOnOff() {
     // Get attributes
     // TODO:
+    JsonObject attributes = GetAttributes("", "AP,USB");
 
     // Convert to binary
+    if (attributes["shared"]["AP"] == "HIGH") {
+        Serial.println("Setting AP HIGH");
+        shiftRegister.set(AP_PIN, HIGH);
+    } else {
+        Serial.println("Setting AP LOW");
+        shiftRegister.set(AP_PIN, LOW);
+    }
 
-    // Set AP pin
-    Serial.write("Setting pins high\n");
-    shiftRegister.set(AP_PIN, HIGH);
-    shiftRegister.set(USB_PIN, HIGH);
-    // ...
-
-
-    delay(5000);
-    Serial.write("Setting pins low\n");
-    shiftRegister.set(AP_PIN, LOW);
-    shiftRegister.set(USB_PIN,LOW);
+    if (attributes["shared"]["USB"] == "HIGH") {
+        Serial.println("Setting USB HIGH");
+        shiftRegister.set(USB_PIN, HIGH);
+    } else {
+        Serial.println("Setting USB LOW");
+        shiftRegister.set(USB_PIN, LOW);
+    }
 }
