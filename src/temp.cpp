@@ -16,5 +16,5 @@ void DHTInit() {
 void SubmitTempData() {
     char payload[50];
     sprintf(payload, "{\"temperature\":%f, \"humidity\":%f}", dht.readTemperature(), dht.readHumidity());
-    SendAttributes(payload);
+    SendTelemetry(payload);
 }
