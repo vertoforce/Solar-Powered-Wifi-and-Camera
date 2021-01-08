@@ -61,7 +61,6 @@ JsonObject GetAttributes(char *clientKeys, char* sharedKeys) {
     sprintf(url, "/api/v1/" ACCESS_TOKEN "/attributes?clientKeys=%s&sharedKeys=%s", clientKeys, sharedKeys);
     String body = Post("GET", String(url), "");
 
-    Serial.println(body);
     StaticJsonDocument<JSON_OBJECT_SIZE(6)> doc;
     DeserializationError err = deserializeJson(doc, body.c_str());
     if (err != NULL) {
