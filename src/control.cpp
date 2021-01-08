@@ -22,7 +22,7 @@ void UpdateOnOff() {
     JsonObject attributes = GetAttributes("", "AP,USB");
 
     // Convert to binary
-    if (attributes["shared"]["AP"] == "HIGH") {
+    if (attributes["shared"]["AP"]) {
         Serial.println("Setting AP HIGH");
         shiftRegister.set(AP_PIN, HIGH);
     } else {
@@ -30,7 +30,7 @@ void UpdateOnOff() {
         shiftRegister.set(AP_PIN, LOW);
     }
 
-    if (attributes["shared"]["USB"] == "HIGH") {
+    if (attributes["shared"]["USB"]) {
         Serial.println("Setting USB HIGH");
         shiftRegister.set(USB_PIN, HIGH);
     } else {
