@@ -51,6 +51,6 @@ void loop() {
 
     // updator.CheckForUpdate();
 
-    // Deep sleep for 5 seconds
-    ESP.deepSleep(1000*1000*5);
+    // Deep sleep
+    ESP.deepSleep(1000*1000*60);
 }
