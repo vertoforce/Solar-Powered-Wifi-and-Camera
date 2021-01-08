@@ -19,7 +19,6 @@ void SetupSRPins() {
 
 void UpdateOnOff() {
     // Get attributes
-    // TODO:
     JsonObject attributes = GetAttributes("", "AP,USB");
 
     // Convert to binary

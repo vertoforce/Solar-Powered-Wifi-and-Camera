@@ -42,7 +42,7 @@ void loop() {
     Serial.print(analogRead(A0));
     Serial.print("\n");
 
-    updator.CheckForUpdate();
+    // updator.CheckForUpdate();
 
     // Sleep
     delay(500);

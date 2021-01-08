@@ -36,7 +36,7 @@ String Post(String method, String path, String body) {
     client.stop();
 
     if (bodyBreak != NULL) {
-        return bodyBreak;
+        return bodyBreak+4;
     }
 
     return returnBody;
