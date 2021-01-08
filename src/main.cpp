@@ -7,6 +7,7 @@
 #include "temp.h"
 #include "wifi.h"
 #include "update.h"
+#include "upload.h"
 
 // Baud rate for debug serial
 #define SERIAL_DEBUG_BAUD 115200
@@ -27,19 +28,26 @@ void setup() {
     ConnectToWifi();
 }
 
+void SubmitBatteryData() {
+    Serial.print("battery value=");
+    Serial.print(analogRead(A0));
+    Serial.print("\n");
+    char payload[50];
+    sprintf(payload, "{\"battery_level\":%d}", analogRead(A0));
+    SendTelemetry(payload);
+}
+
 void loop() {
     // Make sure wifi is connected
     reconnect();
 
-    // Submit temp data
+    // Submit data
+    SubmitBatteryData();
     SubmitTempData();
 
     // Update if anything is on or off
     UpdateOnOff();
 
-    Serial.print("read=");
-    Serial.print(analogRead(A0));
-    Serial.print("\n");
 
     // updator.CheckForUpdate();
 

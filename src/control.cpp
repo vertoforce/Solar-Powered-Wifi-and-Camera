@@ -21,6 +21,11 @@ void UpdateOnOff() {
     // Get attributes
     JsonObject attributes = GetAttributes("", "AP,USB");
 
+    if (attributes["shared"] == NULL) {
+        // Problem with the JSON, skip this
+        return;
+    }
+
     // Convert to binary
     if (attributes["shared"]["AP"]) {
         Serial.println("Setting AP HIGH");

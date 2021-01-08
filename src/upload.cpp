@@ -65,6 +65,8 @@ JsonObject GetAttributes(char *clientKeys, char* sharedKeys) {
     DeserializationError err = deserializeJson(doc, body.c_str());
     if (err != NULL) {
         Serial.println(err.c_str());
+        Serial.println("body:");
+        Serial.println(body);
     }
     JsonObject object = doc.as<JsonObject>();
 
