@@ -30,8 +30,14 @@ String Post(String method, String path, String body) {
     client.println();
     client.flush();
 
-    String returnBody = client.readString();
+    // Find the real body, after the headers
+    const char* returnBody = client.readString().c_str();
+    char* bodyBreak = strstr(returnBody, "\r\n\r\n");
     client.stop();
+
+    if (bodyBreak != NULL) {
+        return bodyBreak;
+    }
 
     return returnBody;
 }
@@ -50,16 +56,18 @@ String SendTelemetry(String data) {
 
 // Get Attributes returns the attributes and their values from the server
 // clientKeys and sharedKeys are a comma separated stirng of requested keys.
-StaticJsonDocument<400> GetAttributes(char *clientKeys, char* sharedKeys) {
+JsonObject GetAttributes(char *clientKeys, char* sharedKeys) {
     char url[150];
     sprintf(url, "/api/v1/" ACCESS_TOKEN "/attributes?clientKeys=%s&sharedKeys=%s", clientKeys, sharedKeys);
-    Serial.println("url");
-    Serial.println(url);
     String body = Post("GET", String(url), "");
+
     Serial.println(body);
+    StaticJsonDocument<JSON_OBJECT_SIZE(6)> doc;
+    DeserializationError err = deserializeJson(doc, body.c_str());
+    if (err != NULL) {
+        Serial.println(err.c_str());
+    }
+    JsonObject object = doc.as<JsonObject>();
 
-    StaticJsonDocument<400> doc;
-    deserializeJson(doc, body);
-
-    return doc;
+    return object;
 }

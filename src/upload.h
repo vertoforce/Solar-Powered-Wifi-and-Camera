@@ -2,4 +2,4 @@
 
 String SendAttributes(String attributes);
 String SendTelemetry(String data);
-StaticJsonDocument<400> GetAttributes(char* clientKeys, char* sharedKeys);
+JsonObject GetAttributes(char* clientKeys, char* sharedKeys);
