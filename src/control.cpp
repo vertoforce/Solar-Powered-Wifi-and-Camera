@@ -18,12 +18,16 @@ void SetupSRPins() {
 }
 
 void UpdateOnOff() {
-    // Get attributes
-    JsonObject attributes = GetAttributes("", "AP,USB");
+    // Get attributes, try 3 times
+    JsonObject attributes;
+    for (int i=0; i<3; i++) {
+        attributes = GetAttributes("", "AP,USB");
 
-    if (attributes["shared"] == NULL) {
-        // Problem with the JSON, skip this
-        return;
+        if (attributes["shared"] == NULL) {
+            // Problem with the JSON, skip this
+            continue;
+        }
+        break;
     }
 
     // Convert to binary
