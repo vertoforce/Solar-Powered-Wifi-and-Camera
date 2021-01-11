@@ -14,6 +14,8 @@
 
 CustomUpdater updator;
 
+extern const String version_string;
+
 void setup() {
     // Init devices
     SetupSRPins();
@@ -22,6 +24,12 @@ void setup() {
 
     // Init serial
     Serial.begin(SERIAL_DEBUG_BAUD);
+
+    // Print version
+    Serial.print("Version: ");
+    Serial.print(WiFi.macAddress());
+    Serial.print("-");
+    Serial.print(version_string);
 
     // Init wifi
     ConnectToWifi();

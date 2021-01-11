@@ -8,8 +8,6 @@
 
 #define UPDATE_CHECK_INTERVAL 5 * 60 * 1000
 
-const String version_string = __TIMESTAMP__;
-
 
 // Variable to keep track of time over deep sleep cycles
 long timeOffset;
