@@ -20,7 +20,9 @@ https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/
 
 To measure the battery voltage (percentage), I use a voltage divider.  However the nodemcu chip already contains a voltage divider on the built in ADC (see below diagram).  So I just need an additional resistor on the input to make sure the upper limit of the batter voltage (`Vmax`) would equate to 1v max on the ESP8266 ADC.  The equation to calculate this resister comes out to `Vmax=R/100k + 3.2`.
 
-`Vmax` for the NiMH battery I have is ~14.6 so the resistor I chose was 1.14Mohm.
+It's hard to find, but it seems the voltage range of the SLA battery is ~`10.8v-14v`.
+
+The voltage divider resistor I chose was 1.14Mohm. This makes the analog reading range of `0-1024` to correspond to voltages `0v-14.6v`.  So in terms of battery voltage, 0% - 100% corresponds to ~`757-982`
 
 ![nodemcu](./docs/nodemcu.png)
 
