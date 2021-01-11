@@ -1,10 +1,11 @@
 // This file provides functionality to perform an OTA update
 // (updating the code remotely)
 
+#include "update.h"
+
 #include <ESP8266httpUpdate.h>
 
 #include "update_creds.h"
-#include "update.h"
 
 #define UPDATE_CHECK_INTERVAL 5 * 60 * 1000
 
@@ -15,26 +16,28 @@ BearSSL::PublicKey signPubKey(PUBLIC_KEY);
 BearSSL::HashSHA256 hash;
 BearSSL::SigningVerifier sign(&signPubKey);
 
-CustomUpdater::CustomUpdater()  {
+CustomUpdater::CustomUpdater() {
     lastChecked = 0;
 
     // Set up our key for signed binaries
-    Update.installSignature(&hash, &sign);
+    // Update.installSignature(&hash, &sign);
 }
 
 void CustomUpdater::CheckForUpdate() {
-    if (millis() - lastChecked > UPDATE_CHECK_INTERVAL) {
-        lastChecked = millis();
-        t_httpUpdate_return ret = ESPhttpUpdate.update(
-            UPDATE_SERVER, UPDATE_PORT, UPDATE_PATH, version_string);
-
-        switch (ret) {
-            case HTTP_UPDATE_FAILED:
-                Serial.println("[update] Update failed.");
-            case HTTP_UPDATE_NO_UPDATES:
-                Serial.println("[update] Update no Update.");
-            case HTTP_UPDATE_OK:
-                Serial.println("[update] Update ok.");
-        }
+    Serial.println("Checking for update");
+    lastChecked = millis();
+    ESPhttpUpdate.rebootOnUpdate(true);
+    t_httpUpdate_return ret = ESPhttpUpdate.update(UPDATE_SERVER, version_string);
+    switch (ret) {
+        case HTTP_UPDATE_FAILED:
+            Serial.println("[update] Update failed.");
+            Serial.println(ESPhttpUpdate.getLastErrorString());
+            return;
+        case HTTP_UPDATE_NO_UPDATES:
+            Serial.println("[update] Update no Update.");
+            return;
+        case HTTP_UPDATE_OK:
+            Serial.println("[update] Update ok.");
+            return;
     }
 }

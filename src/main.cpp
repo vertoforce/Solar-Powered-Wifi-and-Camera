@@ -49,7 +49,7 @@ void loop() {
     UpdateOnOff();
 
 
-    // updator.CheckForUpdate();
+    updator.CheckForUpdate();
 
     // Deep sleep
     ESP.deepSleep(1000*1000*60);
