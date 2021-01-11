@@ -29,7 +29,7 @@ void setup() {
     Serial.print("Version: ");
     Serial.print(WiFi.macAddress());
     Serial.print("-");
-    Serial.print(version_string);
+    Serial.println(version_string);
 
     // Init wifi
     ConnectToWifi();
