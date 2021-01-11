@@ -23,7 +23,8 @@ void UpdateOnOff() {
     for (int i=0; i<3; i++) {
         attributes = GetAttributes("", "AP,USB");
 
-        if (attributes["shared"] == NULL) {
+        if (!attributes.containsKey("shared")) {
+            Serial.println("problem getting attributes, trying again");
             // Problem with the JSON, skip this
             continue;
         }
