@@ -1,8 +1,7 @@
 
 class CustomUpdater {
-    long lastChecked;
-
    public:
     CustomUpdater();
+    void StorePersistentTime(unsigned long additionalOffset);
     void CheckForUpdate();
 };

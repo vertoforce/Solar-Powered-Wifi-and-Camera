@@ -15,7 +15,6 @@
 CustomUpdater updator;
 
 void setup() {
-
     // Init devices
     SetupSRPins();
     DHTInit();
@@ -41,15 +40,17 @@ void loop() {
     // Make sure wifi is connected
     reconnect();
 
-    // Submit data
+    updator.CheckForUpdate();
+
+    // // Submit data
     SubmitBatteryData();
     SubmitTempData();
 
     // Update if anything is on or off
     UpdateOnOff();
 
-
-    updator.CheckForUpdate();
+    // Store time offset
+    updator.StorePersistentTime(1000*60);
 
     // Deep sleep
     ESP.deepSleep(1000*1000*60);
