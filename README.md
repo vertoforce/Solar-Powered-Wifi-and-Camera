@@ -60,30 +60,6 @@ Looking at the relationship between `Vgs` and `Id` (drain to source current), we
 
 The code is in this repo.  I put the ESP8266 in deep sleep to save power over time, having it occationally wake up, check if it needs to turn something on or off, send the temp / humidity data, and go back to sleep.
 
-### Signing binaries
+### Remote code updates
 
-To remote upload a new binary, you must used a signed binary.
-
-First generate your keys
-
-```sh
-mkdir keys
-openssl genrsa -out keys/private.key 2048
-openssl rsa -in keys/private.key -outform PEM -pubout -out keys/public.key
-```
-
-Then add this to `update_creds.h`
-
-```cpp
-#define PUBLIC_KEY "Your public key here"
-```
-
-Then sign the binary
-
-```sh
-./sign.sh
-```
-
-[unifiap]: https://store.ui.com/collections/unifi-network-access-points/products/unifi-ac-mesh-ap
-[mosfet-datasheet]: https://www.infineon.com/dgdl/irlz34npbf.pdf?fileId=5546d462533600a40153567206892720
-[mosfet]: https://www.amazon.com/gp/product/B083TL6Q5X
+The device supports remotely updating the code.  It does this by occasionally checking a server, adhering to the [esp8266 OTA update HTTP headers / protocol](https://arduino-esp8266.readthedocs.io/en/latest/ota_updates/readme.html).
