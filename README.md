@@ -22,7 +22,7 @@ To measure the battery voltage (percentage), I use a voltage divider.  However t
 
 It's hard to find, but it seems the voltage range of the SLA battery is ~`10.8v-14v`.
 
-The voltage divider resistor I chose was 1.14Mohm. This makes the analog reading range of `0-1024` to correspond to voltages `0v-14.6v`.  So in terms of battery voltage, 0% - 100% corresponds to ~`757-982`
+The voltage divider resistor I chose was 1.14Mohm. This makes the analog reading range of `0-1024` to correspond to voltages `0v-14.6v`.  So in terms of battery voltage, 0% - 100% corresponds to analog values ~`740-959`
 
 ![nodemcu](./docs/nodemcu.png)
 
