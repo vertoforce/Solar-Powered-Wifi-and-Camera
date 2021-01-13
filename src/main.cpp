@@ -30,9 +30,6 @@ void setup() {
     Serial.print(WiFi.macAddress());
     Serial.print("-");
     Serial.println(version_string);
-
-    // Init wifi
-    ConnectToWifi();
 }
 
 void SubmitBatteryData() {
