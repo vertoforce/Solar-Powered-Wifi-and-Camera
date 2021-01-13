@@ -11,6 +11,10 @@ WiFiClientSecure client;
 
 // Post makes a post request to the provided path with the provided body.
 String Post(String method, String path, String body) {
+    if (WiFi.status() != WL_CONNECTED) {
+        return "no wifi";
+    }
+
     client.setInsecure();
     if (!client.connect(UPLOAD_TCP_SERVER, UPLOAD_TCP_PORT)) {
         Serial.println("failed to connect");
