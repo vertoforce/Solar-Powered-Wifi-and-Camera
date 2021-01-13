@@ -1,4 +1,4 @@
-const String version_string = __TIMESTAMP__;
+const String version_string = __DATE__ " " __TIME__;
 
 class CustomUpdater {
    public:
