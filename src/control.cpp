@@ -31,6 +31,11 @@ void UpdateOnOff() {
         break;
     }
 
+    // Check if we still failed
+    if (!attributes.containsKey("shared")) {
+        return;
+    }
+
     // Convert to binary
     if (attributes["shared"]["AP"]) {
         Serial.println("Setting AP HIGH");
