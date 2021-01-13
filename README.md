@@ -26,6 +26,12 @@ The voltage divider resistor I chose was 1.14Mohm. This makes the analog reading
 
 ![nodemcu](./docs/nodemcu.png)
 
+#### Solar charge controller
+
+The solar charge controller also measures battery voltage according to the below chart.
+
+![solarBatLevel](./docs/batlevel.png)
+
 ## PoE
 
 I used power over ethernet to power the [Unifi AC Mesh access point][unifiap].
