@@ -33,6 +33,7 @@ CustomUpdater::CustomUpdater() {
 // Check if we updated recently, and update if we haven't
 void CustomUpdater::CheckForUpdate() {
     if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("no wifi to update");
         return;
     }
     if (millis()+((unsigned long) timeOffset) > UPDATE_CHECK_INTERVAL) {

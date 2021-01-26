@@ -15,6 +15,17 @@ void DHTInit() {
 // read the temperature and submit it to thingsboard
 void SubmitTempData() {
     char payload[50];
-    sprintf(payload, "{\"temperature\":%f, \"humidity\":%f}", dht.readTemperature(), dht.readHumidity());
+    float temp = dht.readTemperature();
+    if (temp == 0) {
+        // Try to init again
+        dht.begin();
+        temp = dht.readTemperature();
+    }
+    // Do not submit data if temp is empty
+    if (temp == 0) {
+        return;
+    }
+
+    sprintf(payload, "{\"temperature\":%f, \"humidity\":%f}", temp, dht.readHumidity());
     SendTelemetry(payload);
 }
